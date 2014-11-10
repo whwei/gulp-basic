@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var uglify = require('gulp-uglify');
+var minify = require('gulp-minify-css');
 
 gulp.task('default', ['copy-html', 'copy-js', 'copy-css']);
 
@@ -35,10 +37,12 @@ gulp.task('copy-html', function() {
 
 gulp.task('copy-js', function() {
   gulp.src('src/js/*.js')
+    .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('copy-css', function() {
   gulp.src('src/css/*.css')
+    .pipe(minify())
     .pipe(gulp.dest('dist/css/'));
 });
