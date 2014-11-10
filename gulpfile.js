@@ -1,8 +1,9 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var minify = require('gulp-minify-css');
+var connect = require('gulp-connect');
 
-gulp.task('default', ['copy-html', 'copy-js', 'copy-css']);
+gulp.task('default', ['copy-html', 'copy-js', 'copy-css', 'connect', 'watch']);
 
 /*
 
@@ -15,6 +16,9 @@ gulp.dest(path[, options])
 
 gulp.task(name[, deps], fn)
 注册一个task
+
+gulp.watch(glob[, opts], tasks)
+watch文件的修改
 
 */
 
@@ -38,11 +42,30 @@ gulp.task('copy-html', function() {
 gulp.task('copy-js', function() {
   gulp.src('src/js/*.js')
     .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('copy-css', function() {
   gulp.src('src/css/*.css')
     .pipe(minify())
     .pipe(gulp.dest('dist/css/'));
+});
+
+gulp.task('connect', function() {
+  connect.server({
+      root: 'dist',
+      port: 9999,
+      livereload: true
+  });
+});
+
+gulp.task('reload', function() {
+  gulp.src('src/*.html')
+    .pipe(connect.reload());  
+});
+
+gulp.task('watch', function() {
+  gulp.watch(['src/**/*.html'], ['copy-html', 'reload']);
+  gulp.watch(['src/js/*.js'], ['copy-js', 'reload']);
+  gulp.watch(['src/css/*.css'], ['copy-css', 'reload']);
 });

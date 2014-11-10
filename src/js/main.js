@@ -8,3 +8,4 @@ People.prototype.getName = function() {
 
 var p = new People('xjp');
 console.log(p.getName());
+console.log('balbla');

@@ -6,7 +6,7 @@ div {
   background-color: pink;
 }
 p {
- width: 50%;
- background-color: skyblue; 
- transform: rotate(10deg);
+  width: 50%;
+  background-color: skyblue; 
+  transform: rotate(20deg);
 }
