@@ -8,5 +8,8 @@ div {
 p {
   width: 50%;
   background-color: skyblue; 
-  transform: rotate(20deg);
+  transform: rotate(-20deg);
+}
+.icon {
+  display: block;
 }
