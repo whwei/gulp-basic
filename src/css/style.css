@@ -1,0 +1,12 @@
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: pink;
+}
+p {
+ width: 50%;
+ background-color: skyblue; 
+ transform: rotate(10deg);
+}
