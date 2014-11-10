@@ -7,6 +7,8 @@ var spritesmith = require('gulp.spritesmith');
 
 gulp.task('default', ['copy-html', 'copy-js', 'copy-css', 'connect', 'watch']);
 
+gulp.task('build', ['copy-html', 'uglify-js', 'build-image', 'minify-css']);
+
 gulp.task('build-image', ['sprites', 'copy-image']);
 
 /*
@@ -49,12 +51,27 @@ gulp.task('copy-js', function() {
     .pipe(gulp.dest('dist/js/'));
 });
 
+gulp.task('uglify-js', function() {
+  gulp.src('src/js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js/'));
+});
+
 gulp.task('copy-css', function() {
   gulp.src('src/css/*.css')
     .pipe(autoprefixer({
         broswers: ['last 8 versions']
     }))
     //.pipe(minify())
+    .pipe(gulp.dest('dist/css/'));
+});
+
+gulp.task('minify-css', ['build-image'], function() {
+  gulp.src('src/css/*.css')
+    .pipe(autoprefixer({
+        broswers: ['last 8 versions']
+    }))
+    .pipe(minify())
     .pipe(gulp.dest('dist/css/'));
 });
 
