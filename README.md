@@ -1,4 +1,4 @@
 gulp-basic
 ==========
 
-gulp basic demo
+gulp basic
